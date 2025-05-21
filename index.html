@@ -1,1 +1,83 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blacrypt Countdown</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    #countdown {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    input[type="email"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background: #00bcd4;
+      color: white;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background: #008c9e;
+    }
+  </style>
+</head>
+<body>
+  <h1>Blacrypt: It's Just The Beginning</h1>
+  <div id="countdown"></div>
+  <form onsubmit="joinTelegram(); return false;">
+    <input type="email" id="email" placeholder="Enter your email" required />
+    <button type="submit">Join</button>
+  </form>
+  <script>
+    // Countdown Logic (250 days from today)
+    const now = new Date();
+    const launchDate = new Date(now.getTime() + 250 * 24 * 60 * 60 * 1000);function updateCountdown() {
+  const currentTime = new Date();
+  const diff = launchDate - currentTime;
 
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("countdown").innerText =
+    ${days}d ${hours}h ${minutes}m ${seconds}s;
+}
+
+setInterval(updateCountdown, 1000);
+
+function joinTelegram() {
+  const email = document.getElementById("email").value;
+  console.log("Collected email:", email); // For now, logs only (backend not connected)
+  window.location.href = "https://t.me/+VLTjKoLn6oU3Nzc1"; // Replace with your real link
+}
+
+  </script>
+</body>
+</html>
