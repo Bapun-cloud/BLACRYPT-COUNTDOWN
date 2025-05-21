@@ -1,70 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Blacrypt — The Countdown Begins</title>
+  <meta charset="UTF-8" />
+  <title>Blacrypt — It's Just Beginning</title>
   <style>
     body {
-      background: black;
-      color: white;
-      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
       text-align: center;
-      padding-top: 100px;
     }
+
     h1 {
-      font-size: 3rem;
+      font-size: 3em;
       margin-bottom: 20px;
     }
+
     #countdown {
-      font-size: 2rem;
-      margin-bottom: 40px;
+      font-size: 2em;
+      margin-bottom: 30px;
     }
-    .btn {
-      background: #00ffcc;
-      border: none;
-      color: black;
-      padding: 12px 25px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      border-radius: 8px;
-      margin: 10px;
-      transition: 0.3s;
-    }
-    .btn:hover {
-      background: #00ddb3;
-    }
+
     input[type="email"] {
       padding: 10px;
-      font-size: 1rem;
+      border-radius: 6px;
+      border: none;
+      font-size: 1em;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
       border: none;
       border-radius: 6px;
-      margin-right: 10px;
+      background-color: #00ffc3;
+      color: #000;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #00cfa0;
+    }
+
+    .section {
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <h1>Blacrypt is Coming</h1>
-  <div id="countdown"></div>
+  <div id="countdown">Loading...</div>
 
-  <div>
+  <div class="section">
     <a href="https://t.me/+VLTjKoLn6oU3Nzc1" target="_blank">
-      <button class="btn">Join the Movement</button>
+      <button>Join the Movement</button>
     </a>
   </div>
 
-  <div>
-    <input type="email" id="emailInput" placeholder="Enter your email">
-    <button class="btn" onclick="submitEmail()">Sign Up</button>
+  <div class="section">
+    <input type="email" id="emailInput" placeholder="Enter your email" />
+    <button onclick="submitEmail()">Sign Up</button>
   </div>
 
   <script>
-    // Set launch date = today + 250 days
+    // Set the countdown to 250 days from today
     const launchDate = new Date();
     launchDate.setDate(launchDate.getDate() + 250);
 
     function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = launchDate.getTime() - now;
+      const now = new Date();
+      const distance = launchDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "We're live!";
+        return;
+      }
 
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
@@ -77,8 +95,7 @@
 
     function submitEmail() {
       const email = document.getElementById("emailInput").value;
-      alert("Thanks! We'll notify you: " + email);
-      // Future: connect to database, email list, etc.
+      alert(Thanks! We'll notify you at: ${email});
     }
 
     setInterval(updateCountdown, 1000);
