@@ -1,83 +1,88 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blacrypt Countdown</title>
+  <meta charset="UTF-8">
+  <title>Blacrypt — The Countdown Begins</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #000;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
       text-align: center;
-      padding: 20px;
+      padding-top: 100px;
     }
     h1 {
       font-size: 3rem;
-      margin-bottom: 1rem;
+      margin-bottom: 20px;
     }
     #countdown {
       font-size: 2rem;
-      margin-bottom: 2rem;
+      margin-bottom: 40px;
+    }
+    .btn {
+      background: #00ffcc;
+      border: none;
+      color: black;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-radius: 8px;
+      margin: 10px;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #00ddb3;
     }
     input[type="email"] {
-      padding: 0.5rem;
+      padding: 10px;
       font-size: 1rem;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       margin-right: 10px;
-    }
-    button {
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      background: #00bcd4;
-      color: white;
-      margin-top: 1rem;
-    }
-    button:hover {
-      background: #008c9e;
     }
   </style>
 </head>
 <body>
-  <h1>Blacrypt: It's Just The Beginning</h1>
+  <h1>Blacrypt is Coming</h1>
   <div id="countdown"></div>
-  <form onsubmit="joinTelegram(); return false;">
-    <input type="email" id="email" placeholder="Enter your email" required />
-    <button type="submit">Join</button>
-  </form>
+
+  <div>
+    <a href="https://t.me/+VLTjKoLn6oU3Nzc1" target="_blank">
+      <button class="btn">Join the Movement</button>
+    </a>
+  </div>
+
+  <div>
+    <input type="email" id="emailInput" placeholder="Enter your email">
+    <button class="btn" onclick="submitEmail()">Sign Up</button>
+  </div>
+
   <script>
-    // Countdown Logic (250 days from today)
-    const now = new Date();
-    const launchDate = new Date(now.getTime() + 250 * 24 * 60 * 60 * 1000);function updateCountdown() {
-  const currentTime = new Date();
-  const diff = launchDate - currentTime;
+    // Set launch date = today + 250 days
+    const launchDate = new Date();
+    launchDate.setDate(launchDate.getDate() + 250);
 
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = launchDate.getTime() - now;
 
-  document.getElementById("countdown").innerText =
-    ${days}d ${hours}h ${minutes}m ${seconds}s;
-}
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / 1000 / 60) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
 
-setInterval(updateCountdown, 1000);
+      document.getElementById("countdown").innerHTML =
+        ${days}d ${hours}h ${minutes}m ${seconds}s;
+    }
 
-function joinTelegram() {
-  const email = document.getElementById("email").value;
-  console.log("Collected email:", email); // For now, logs only (backend not connected)
-  window.location.href = "https://t.me/+VLTjKoLn6oU3Nzc1"; // Replace with your real link
-}
+    function submitEmail() {
+      const email = document.getElementById("emailInput").value;
+      alert("Thanks! We'll notify you: " + email);
+      // Future: connect to database, email list, etc.
+    }
 
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
   </script>
 </body>
 </html>
